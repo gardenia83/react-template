@@ -1,0 +1,16 @@
+.app {
+  height: 100%;
+  background-image: url("../assets/bg.jpeg");
+}
+.app .wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.wrapper > .logo {
+  width: 2rem;
+  height: 2rem;
+}
+.wrapper > .title {
+  font-size: 1.5rem;
+}
