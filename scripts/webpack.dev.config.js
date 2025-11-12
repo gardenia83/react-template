@@ -1,21 +1,21 @@
-const baseConfig = require("./webpack.base.config.js");
-const { merge } = require("webpack-merge");
-const path = require("path");
+const baseConfig = require('./webpack.base.config.js');
+const { merge } = require('webpack-merge');
+const path = require('path');
 module.exports = merge(baseConfig, {
-  mode: "development",
-  devtool: "eval-cheap-module-source-map",
+  mode: 'development',
+  devtool: 'eval-cheap-module-source-map',
   output: {
-    publicPath: "/",
+    publicPath: '/',
   },
   devServer: {
     port: 3000,
   },
-  stats: "minimal",
+  stats: 'minimal',
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

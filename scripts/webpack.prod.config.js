@@ -1,44 +1,43 @@
-const path = require("path");
-const baseConfig = require("./webpack.base.config");
-const { merge } = require("webpack-merge");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const { EsbuildPlugin } = require("esbuild-loader");
+const baseConfig = require('./webpack.base.config');
+const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const { EsbuildPlugin } = require('esbuild-loader');
 module.exports = merge(baseConfig, {
-  mode: "production",
-  devtool: "hidden-source-map",
+  mode: 'production',
+  devtool: 'hidden-source-map',
   output: {
-    publicPath: "./",
+    publicPath: './',
   },
   optimization: {
     runtimeChunk: {
-      name: "manifest",
+      name: 'manifest',
     },
     splitChunks: {
-      chunks: "all",
+      chunks: 'all',
       minSize: 30000,
       minChunks: 1,
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all",
+          name: 'vendors',
+          chunks: 'all',
           priority: 20, // 优先级高
         },
         common: {
-          name: "common",
+          name: 'common',
           minChunks: 2, // 被两个及以上chunk引用才提取
-          chunks: "all",
+          chunks: 'all',
           priority: 10,
           reuseExistingChunk: true, // 避免模块重复打包[citation:6]
         },
       },
     },
     minimizer: [
-      "...",
+      '...',
       new EsbuildPlugin({
-        target: "es2015",
+        target: 'es2015',
         minify: true,
         css: false,
       }),
@@ -61,7 +60,7 @@ module.exports = merge(baseConfig, {
               },
             },
           },
-          filter: (source) => source.size > 20 * 1024,
+          filter: source => source.size > 20 * 1024,
         },
       }),
     ],
@@ -74,27 +73,18 @@ module.exports = merge(baseConfig, {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../",
+              publicPath: '../',
             },
           },
-          "css-loader",
+          'css-loader',
         ],
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "css/[name].[contenthash:8].css",
-      chunkFilename: "css/[name].[contenthash:8].chunk.css",
+      filename: 'css/[name].[contenthash:8].css',
+      chunkFilename: 'css/[name].[contenthash:8].chunk.css',
     }),
-    // new TerserPlugin({
-    //   parallel: Math.max(1, require("os").cpus().length - 1), // 多进程压缩
-    //   terserOptions: {
-    //     format: {
-    //       comments: false,
-    //     },
-    //   },
-    //   extractComments: false,
-    // }),
   ],
 });
