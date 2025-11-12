@@ -8,7 +8,7 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = merge(baseConfig, {
   mode: "production",
-  devtool: "source-map",
+  devtool: "hidden-source-map",
   output: {
     publicPath: "./",
   },
@@ -18,7 +18,7 @@ module.exports = merge(baseConfig, {
     },
     splitChunks: {
       chunks: "all",
-      minSize: 20000,
+      minSize: 30000,
       minChunks: 1,
       cacheGroups: {
         vendor: {
@@ -57,6 +57,7 @@ module.exports = merge(baseConfig, {
               },
             },
           },
+          filter: (source) => source.size > 20 * 1024,
         },
       }),
     ],
@@ -83,7 +84,7 @@ module.exports = merge(baseConfig, {
       chunkFilename: "css/[name].[contenthash:8].chunk.css",
     }),
     new TerserPlugin({
-      parallel: true, // 多进程压缩
+      parallel: Math.max(1, require("os").cpus().length - 1), // 多进程压缩
     }),
   ],
 });

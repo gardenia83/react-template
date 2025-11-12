@@ -15,13 +15,16 @@ module.exports = {
       "@": path.resolve(__dirname, "../src"),
     },
   },
+  cache: {
+    type: "filesystem",
+    buildDependencies: {
+      config: [__filename],
+    },
+    cacheDirectory: path.resolve(__dirname, "../node_modules/.cache/webpack"),
+    version: "1.0.0",
+  },
   module: {
     rules: [
-      /* {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: "babel-loader",
-      }, */
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,

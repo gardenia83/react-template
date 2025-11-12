@@ -11,14 +11,6 @@ module.exports = merge(baseConfig, {
     port: 3000,
   },
   stats: "minimal",
-  cache: {
-    type: "filesystem",
-    buildDependencies: {
-      config: [__filename],
-    },
-    cacheDirectory: path.resolve(__dirname, "../node_modules/.cache/webpack"),
-    version: "1.0.0",
-  },
   module: {
     rules: [
       {
