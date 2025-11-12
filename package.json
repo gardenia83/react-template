@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack serve",
-    "build": "cross-env NODE_ENV=production webpack"
+    "dev": "cross-env NODE_ENV=development webpack serve --config scripts/webpack.dev.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config scripts/webpack.prod.config.js"
   },
   "keywords": [],
   "author": "",
@@ -14,12 +14,19 @@
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-react": "^7.28.5",
+    "@swc/core": "^1.15.1",
     "babel-loader": "^10.0.0",
     "cross-env": "^10.1.0",
     "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.2",
+    "esbuild-loader": "^4.4.0",
     "html-webpack-plugin": "^5.6.4",
+    "image-minimizer-webpack-plugin": "^4.1.4",
+    "imagemin-sharp": "^1.0.6",
     "mini-css-extract-plugin": "^2.9.4",
+    "sharp": "^0.34.5",
     "style-loader": "^4.0.0",
+    "swc-loader": "^0.2.6",
     "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2"

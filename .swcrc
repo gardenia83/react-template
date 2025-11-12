@@ -1,0 +1,36 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "ecmascript",
+      "jsx": true,
+      "dynamicImport": true,
+      "numericSeparator": true,
+      "classPrivateProperty": true,
+      "classPrivateMethod": true,
+      "classProperty": true,
+      "functionBind": true,
+      "exportDefaultFrom": true,
+      "exportNamespaceFrom": true
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic",
+        "refresh": true
+      }
+    },
+    "externalHelpers": false,
+    "keepClassNames": false,
+    "minify": {
+      "compress": false,
+      "mangle": false
+    }
+  },
+  "env": {
+    "mode": "usage",
+    "coreJs": 3
+  },
+  "module": {
+    "type": "es6"
+  },
+  "minify": false
+}
