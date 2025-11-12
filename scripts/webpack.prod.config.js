@@ -47,13 +47,13 @@ module.exports = merge(baseConfig, {
           options: {
             encodeOptions: {
               mozjpeg: {
-                quality: 80,
+                quality: 75,
               },
               pngquant: {
-                quality: [0.8, 0.9],
+                quality: [0.7, 0.8],
               },
               webp: {
-                quality: 80,
+                quality: 75,
               },
             },
           },
@@ -85,6 +85,12 @@ module.exports = merge(baseConfig, {
     }),
     new TerserPlugin({
       parallel: Math.max(1, require("os").cpus().length - 1), // 多进程压缩
+      terserOptions: {
+        format: {
+          comments: false,
+        },
+      },
+      extractComments: false,
     }),
   ],
 });
