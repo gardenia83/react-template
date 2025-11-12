@@ -3,9 +3,8 @@ const baseConfig = require("./webpack.base.config");
 const { merge } = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-
+const { EsbuildPlugin } = require("esbuild-loader");
 module.exports = merge(baseConfig, {
   mode: "production",
   devtool: "hidden-source-map",
@@ -38,6 +37,11 @@ module.exports = merge(baseConfig, {
     },
     minimizer: [
       "...",
+      new EsbuildPlugin({
+        target: "es2015",
+        minify: true,
+        css: false,
+      }),
       new CssMinimizerPlugin({
         parallel: true,
       }),
@@ -83,14 +87,14 @@ module.exports = merge(baseConfig, {
       filename: "css/[name].[contenthash:8].css",
       chunkFilename: "css/[name].[contenthash:8].chunk.css",
     }),
-    new TerserPlugin({
-      parallel: Math.max(1, require("os").cpus().length - 1), // 多进程压缩
-      terserOptions: {
-        format: {
-          comments: false,
-        },
-      },
-      extractComments: false,
-    }),
+    // new TerserPlugin({
+    //   parallel: Math.max(1, require("os").cpus().length - 1), // 多进程压缩
+    //   terserOptions: {
+    //     format: {
+    //       comments: false,
+    //     },
+    //   },
+    //   extractComments: false,
+    // }),
   ],
 });

@@ -28,9 +28,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "swc-loader",
-        },
+        use: [{ loader: "swc-loader" }],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/i,
